@@ -32,7 +32,3 @@ tr:nth-child(even) {
   float: right;
   margin-bottom: 5px;
 }
-
-.list-header {
-  text-align: center;
-}

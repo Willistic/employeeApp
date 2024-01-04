@@ -10,22 +10,22 @@ type Props = {
 
 const EmployeeList = (props: Props) => {
   const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState(null as EmployeeTypes | null)
+  const [modalData, setModalData] = useState(null as EmployeeTypes | null);
   const { list, handleDelete, onEdit } = props;
 
   const onCloseModal = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   const viewEmployee = (data: EmployeeTypes) => {
-     setModalData(data);
-    setShowModal(true)
-  }
+    setModalData(data);
+    setShowModal(true);
+  };
 
   return (
     <div>
       <article>
-        <h1 className="list-header">Employee List</h1>
+        <h1>Employee List</h1>
       </article>
       <table>
         <thead>
