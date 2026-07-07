@@ -1,63 +1,66 @@
 import { useState } from "react";
+
+import type { Employee } from "../features/employees/types";
 import EmployeeModal from "./EmployeeModal";
-import { EmployeeTypes } from "./EmployeeType";
 
-type Props = {
-  list: EmployeeTypes[];
-  handleDelete: (data: EmployeeTypes) => void;
-  onEdit: (data: EmployeeTypes) => void;
-};
+interface EmployeeListProps {
+  employees: Employee[];
+  onEdit: (employee: Employee) => void;
+  onDelete: (id: string) => void;
+}
 
-const EmployeeList = (props: Props) => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState(null as EmployeeTypes | null);
-  const { list, handleDelete, onEdit } = props;
+const EmployeeList = ({ employees, onEdit, onDelete }: EmployeeListProps) => {
+  const [selected, setSelected] = useState<Employee | null>(null);
 
-  const onCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const viewEmployee = (data: EmployeeTypes) => {
-    setModalData(data);
-    setShowModal(true);
-  };
+  if (employees.length === 0) {
+    return (
+      <p className="empty-state">
+        No employees yet. Add your first employee to get started.
+      </p>
+    );
+  }
 
   return (
     <div>
-      <article>
-        <h1>Employee List</h1>
-      </article>
+      <h2>Employee list</h2>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {list.map((employee) => {
+          {employees.map((employee) => {
+            const fullName = `${employee.firstName} ${employee.lastName}`;
             return (
               <tr key={employee.id}>
-                <td>{`${employee.firstName} ${employee.lastName}`}</td>
+                <td>{fullName}</td>
                 <td>{employee.email}</td>
                 <td>
-                  <div>
-                    <input
+                  <div className="row-actions">
+                    <button
                       type="button"
-                      value="view"
-                      onClick={() => viewEmployee(employee)}
-                    />
-                    <input
+                      onClick={() => setSelected(employee)}
+                      aria-label={`View ${fullName}`}
+                    >
+                      View
+                    </button>
+                    <button
                       type="button"
-                      value="edit"
                       onClick={() => onEdit(employee)}
-                    />
-                    <input
+                      aria-label={`Edit ${fullName}`}
+                    >
+                      Edit
+                    </button>
+                    <button
                       type="button"
-                      value="delete"
-                      onClick={() => handleDelete(employee)}
-                    />
+                      onClick={() => onDelete(employee.id)}
+                      aria-label={`Delete ${fullName}`}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -65,12 +68,9 @@ const EmployeeList = (props: Props) => {
           })}
         </tbody>
       </table>
-      {showModal && modalData !== null && (
-        <EmployeeModal
-          onClose={onCloseModal}
-          data={modalData}
-          onEdit={viewEmployee}
-        />
+
+      {selected && (
+        <EmployeeModal employee={selected} onClose={() => setSelected(null)} />
       )}
     </div>
   );

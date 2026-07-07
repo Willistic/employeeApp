@@ -32,3 +32,34 @@ tr:nth-child(even) {
   float: right;
   margin-bottom: 5px;
 }
+
+.page-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: rgb(7, 87, 87);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #555;
+  margin-top: 40px;
+}
+
+.error-boundary {
+  text-align: center;
+  margin-top: 40px;
+}

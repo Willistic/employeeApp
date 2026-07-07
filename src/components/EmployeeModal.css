@@ -34,3 +34,23 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Employee details definition list */
+.modal-content dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 16px;
+  row-gap: 8px;
+  margin: 12px 0 0;
+}
+
+.modal-content dt {
+  font-weight: 600;
+  text-align: left;
+}
+
+.modal-content dd {
+  margin: 0;
+  text-align: left;
+  word-break: break-word;
+}

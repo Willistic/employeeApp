@@ -1,10 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import App from "./App";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { EmployeeProvider } from "./features/employees/EmployeeContext";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <EmployeeProvider>
+          <App />
+        </EmployeeProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>,
-)
+);
