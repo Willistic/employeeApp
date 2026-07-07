@@ -5,15 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { EmployeeProvider } from "./features/employees/EmployeeContext";
+import { ToastProvider } from "./features/toast/ToastContext";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
-        <EmployeeProvider>
-          <App />
-        </EmployeeProvider>
+        <ToastProvider>
+          <EmployeeProvider>
+            <App />
+          </EmployeeProvider>
+        </ToastProvider>
       </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>,

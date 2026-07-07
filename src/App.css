@@ -28,42 +28,10 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.add-employee-btn {
-  float: right;
-  margin-bottom: 5px;
-}
-
 .page-toolbar {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
-}
-
-.button-link {
-  display: inline-block;
-  padding: 6px 12px;
-  background-color: rgb(7, 87, 87);
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.row-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.row-actions button {
-  padding: 6px 12px;
-  background-color: rgb(7, 87, 87);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.row-actions button:hover {
-  background-color: rgb(5, 66, 66);
 }
 
 .empty-state {

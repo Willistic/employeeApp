@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -6,6 +5,8 @@ import {
   employeeSchema,
   type EmployeeFormValues,
 } from "../features/employees/schema";
+import Button from "./ui/Button";
+import Input from "./ui/Input";
 import "./EmployeeForm.css";
 
 interface EmployeeFormProps {
@@ -46,73 +47,36 @@ const EmployeeForm = ({
     defaultValues,
   });
 
-  const firstNameId = useId();
-  const lastNameId = useId();
-  const emailId = useId();
-
   return (
     <div className="form-container">
       <h2>{title}</h2>
       <form onSubmit={handleSubmit((values) => onSubmit(values))} noValidate>
-        <div className="form-field">
-          <label htmlFor={firstNameId}>First name</label>
-          <input
-            id={firstNameId}
-            type="text"
-            aria-invalid={Boolean(errors.firstName)}
-            aria-describedby={
-              errors.firstName ? `${firstNameId}-error` : undefined
-            }
-            {...register("firstName")}
-          />
-          {errors.firstName && (
-            <p id={`${firstNameId}-error`} className="form-error" role="alert">
-              {errors.firstName.message}
-            </p>
-          )}
-        </div>
-
-        <div className="form-field">
-          <label htmlFor={lastNameId}>Last name</label>
-          <input
-            id={lastNameId}
-            type="text"
-            aria-invalid={Boolean(errors.lastName)}
-            aria-describedby={
-              errors.lastName ? `${lastNameId}-error` : undefined
-            }
-            {...register("lastName")}
-          />
-          {errors.lastName && (
-            <p id={`${lastNameId}-error`} className="form-error" role="alert">
-              {errors.lastName.message}
-            </p>
-          )}
-        </div>
-
-        <div className="form-field">
-          <label htmlFor={emailId}>Email</label>
-          <input
-            id={emailId}
-            type="email"
-            aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? `${emailId}-error` : undefined}
-            {...register("email")}
-          />
-          {errors.email && (
-            <p id={`${emailId}-error`} className="form-error" role="alert">
-              {errors.email.message}
-            </p>
-          )}
-        </div>
+        <Input
+          label="First name"
+          type="text"
+          error={errors.firstName?.message}
+          {...register("firstName")}
+        />
+        <Input
+          label="Last name"
+          type="text"
+          error={errors.lastName?.message}
+          {...register("lastName")}
+        />
+        <Input
+          label="Email"
+          type="email"
+          error={errors.email?.message}
+          {...register("email")}
+        />
 
         <div className="form-actions">
-          <button type="button" onClick={onCancel}>
+          <Button variant="secondary" onClick={onCancel}>
             Back
-          </button>
-          <button type="submit" disabled={isSubmitting}>
+          </Button>
+          <Button type="submit" disabled={isSubmitting}>
             {submitLabel}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

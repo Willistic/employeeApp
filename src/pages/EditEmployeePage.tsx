@@ -2,10 +2,12 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import EmployeeForm from "../components/EmployeeForm";
 import { useEmployees } from "../features/employees/useEmployees";
+import { useToast } from "../features/toast/useToast";
 
 const EditEmployeePage = () => {
   const { id } = useParams<{ id: string }>();
   const { getById, updateEmployee } = useEmployees();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const employee = id ? getById(id) : undefined;
@@ -25,6 +27,10 @@ const EditEmployeePage = () => {
       }}
       onSubmit={(values) => {
         updateEmployee({ id: employee.id, ...values });
+        showToast(
+          `${values.firstName} ${values.lastName} was updated.`,
+          "success",
+        );
         navigate("/");
       }}
       onCancel={() => navigate("/")}
